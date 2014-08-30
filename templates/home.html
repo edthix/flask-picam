@@ -6,6 +6,14 @@
 <body>
 	<h1>Control the Pi Camera Module</h1>
 
+	{% with messages = get_flashed_messages() %}
+	<p style="color: #0f0">
+	  {% for message in messages %}
+	  {{ message }}
+	  {% endfor %}
+	</p>
+	{% endwith %}
+
 	<form action="/snap" method="post">
 		<p>
 			<input type="submit" value="Snap">

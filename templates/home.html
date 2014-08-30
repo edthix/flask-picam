@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home : Flask PiCam</title>
-</head>
-<body>
-	<h1>Control the Pi Camera Module</h1>
+{% extends "base.html" %}
+{% block title %}
+Home
+{% endblock %}
 
-	{% with messages = get_flashed_messages() %}
-	<p style="color: #0f0">
-	  {% for message in messages %}
-	  {{ message }}
-	  {% endfor %}
-	</p>
-	{% endwith %}
+{% block content %}
 
-	<form action="/snap" method="post">
-		<p>
-			<input type="submit" value="Snap">
-		</p>
-	</form>
+<ul>
+  <li><a href="/snap">Snap</a></li>
+</ul>
 
-</body>
-</html>
+{% endblock%}

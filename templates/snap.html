@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+Snap
+{% endblock %}
+
+{% block style %}
+p.flash {
+background-color: #ccc;
+color: #00f;
+font-weight: bold;
+}
+{% endblock %}
+
+{% block content %}
+
+{% with msgs = get_flashed_messages() %}
+{% for msg in msgs %}
+<p class="flash">{{ msg }}</p>
+{% endfor %}
+{% endwith %}
+
+{% if filename %}
+<a href="{{ filename }}">Click here to view</a>
+{% endif %}
+
+<p>
+Snap a photo using the Pi Cam. Click snap below and wait for 5 seconds.
+</p>
+
+<form method="POST" action="/snap">
+  <input type="submit" value="Snap">
+</form>
+
+{% endblock%}

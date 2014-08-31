@@ -28,12 +28,34 @@ def snap():
     else:
         return render_template('snap.html', filename=request.args.get('filename'))
 
-def generate_filename(filetype=''):
+@app.route('/shoot', methods=['GET', 'POST'])
+def shoot():
+    '''
+    shoot a video
+    save to /static/videos/video-**timestamp**.h264
+    '''
+    if request.method == 'POST':
+        filename = generate_filename('h264', 'videos')
+        with picamera.PiCamera() as camera:
+            camera.resolution = (640, 480)
+            camera.start_preview()
+            camera.start_recording(filename)
+            camera.wait_recording(10)
+            camera.stop_recording()
+            camera.stop_preview()
+            
+        flash('Video recorded in ' + filename)
+        return redirect(url_for('shoot', filename=filename))
+    else:
+        return render_template('shoot.html', filename=request.args.get('filename'))
+
+
+def generate_filename(filetype='', folder='images'):
     '''
     Generate a timestamped filename
     filetype = jpg, gif, etc.
     '''
-    filename = 'static/images/image-' + time.strftime("%Y%m%d%H%M%S", time.gmtime()) + '.' + filetype
+    filename = 'static/' + folder + '/image-' + time.strftime("%Y%m%d%H%M%S", time.gmtime()) + '.' + filetype
     return filename
 
 if __name__ == '__main__':

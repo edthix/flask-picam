@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+Shoot a video
+{% endblock %}
+
+{% block style %}
+p.flash {
+background-color: #ccc;
+color: #00f;
+font-weight: bold;
+}
+{% endblock %}
+
+{% block content %}
+
+{% with msgs = get_flashed_messages() %}
+{% for msg in msgs %}
+<p class="flash">{{ msg }}</p>
+{% endfor %}
+{% endwith %}
+
+{% if filename %}
+<a href="{{ filename }}">Click here to view</a>
+{% endif %}
+
+<p>
+Shoot a video using the Pi Cam. Click shoot below
+</p>
+
+<form method="POST" action="/shoot">
+  <input type="submit" value="Shoot">
+</form>
+
+{% endblock%}

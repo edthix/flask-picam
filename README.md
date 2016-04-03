@@ -1,3 +1,3 @@
 flask-picam
 
-Control Pi Camera via simple Flask app
+Simple implementation of picamera + flask for demo purposes and Raspberry Jams
